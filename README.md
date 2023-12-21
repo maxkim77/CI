@@ -157,17 +157,17 @@ sudo apt install nginx
 
 sudo vim /etc/nginx/sites-enabled/default # nginx 설정파일 편집 실행
 
-server{
-	root /var/www/html;
-	server_name # 도메인 주소 없으면 IPV4 주소
+server {
+        listen 80;
+        server_name 서버주소;
 
-	location /api/v1/{ # 프론트에서 오는 /api/v1/ 으로 시작되는 모든 요청 핸들링
-             include proxy_params;
-             proxy_pass http://unix:/tmp/gunicorn.sock;
-        }
 
+        location / {
+        include proxy_params;
+        proxy_pass http://unix:/tmp/gunicorn.sock;
+       }
 }
-
+                        
 sudo systemctl restart nginx
 sudo systemctl status nginx
 
