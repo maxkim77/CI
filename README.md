@@ -86,6 +86,8 @@ gunicorn --bind 0:5000 {프로젝트이름}.wsgi:application
 """
 
 ```
+포트번호 5000번 열면 됩니다.
+![image](https://github.com/maxkim77/CI/assets/141907655/87d4744f-2599-424f-a4fb-2ff60db62ace)
 
 - 유닉스(우분투) 소켓을 활용한 수행항법
 유닉스 소켓: IPC 소켓이라고도 불리며 시스템내  프로세스 간의 데이터를 교환하기 위한 수단.
