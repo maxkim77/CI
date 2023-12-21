@@ -135,6 +135,12 @@ sudo systemctl start {위에서 작성했던 파일명}
 # 실행확인
 sudo systemctl status {위에서 작성했던 파일명} # .service 빼고입니다.
 
+만약 status에서 오류가 떠서 프로젝트.service 파일을 수정했다면
+sudo systemctl daemon-reload
+sudo systemctl start {위에서 작성했던 파일명}
+sudo systemctl status {위에서 작성했던 파일명} # .service 빼고입니다.
+
+
 sudo systemctl enable {위에서 작성했던 파일명} # .service 빼고입니다.
 # 서버가 재실행 될 때 Gunicorn 서비스가 자동 실행되게 만들어 줍니다.
 
