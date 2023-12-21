@@ -7,25 +7,6 @@ sudo apt update
 
 sudo apt upgrade
 
-mkdir 레포명
-
-cd 레포명
-
-git init
-
-git remote add origin [원격-리포지토리-URL]
-
-git pull origin main
-
-git config --global credential.helper store
-
-sudo apt install python3-pip
-
-sudo apt install python3.10-venv
-
-python3 -m venv venv
-
-source venv/bin/activate
 
 ```
 
@@ -58,6 +39,32 @@ sudo passwd [사용자이름]
 이렇게 하면 원격으로 SSH를 통해 서버에 접속할 때 비밀번호 인증을 요구하게 됩니다. 비밀번호는 강력하고 예측하기 어려운 것으로 설정하는 것이 좋습니다. 또한, SSH 키 기반 인증과 비밀번호 기반 인증을 함께 사용하면 보안을 더욱 강화할 수 있습니다.
 
 ```
+
+- Git 연결 및 Pull
+
+```
+
+mkdir 레포명
+
+cd 레포명
+
+git init
+
+git remote add origin [원격-리포지토리-URL]
+
+git pull origin main
+
+git config --global credential.helper store
+
+sudo apt install python3-pip
+
+sudo apt install python3.10-venv
+
+python3 -m venv venv
+
+source venv/bin/activate
+```
+
 
 - 레포지토리 설정 → Secrets and variables 클릭
 
