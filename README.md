@@ -7,6 +7,15 @@ sudo apt update
 
 sudo apt upgrade
 
+git pull 레포주소
+
+git config --global credential.helper store
+
+sudo apt install python3-pip
+
+sudo apt install python3.10-venv
+
+
 ```
 
 - 계정 비밀번호 설정
