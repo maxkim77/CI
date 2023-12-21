@@ -1,5 +1,13 @@
 # CI / CD
 - 과정
+- ubuntu 생성 후 업데이트 업그레이드
+
+```
+sudo apt update
+
+sudo apt upgrade
+
+```
 
 - 계정 비밀번호 설정
 ```
