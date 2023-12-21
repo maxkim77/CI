@@ -151,6 +151,10 @@ sudo systemctl restart {위에서 작성했던 파일명} # .service 빼고입�
 - 4. Nginx 설정
  
 ```
+
+sudo apt install nginx
+
+
 sudo vim /etc/nginx/sites-enabled/default # nginx 설정파일 편집 실행
 
 server{
@@ -163,6 +167,10 @@ server{
         }
 
 }
+
+sudo systemctl restart nginx
+sudo systemctl status nginx
+
 ```
 
 
