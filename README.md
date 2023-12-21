@@ -41,7 +41,16 @@ sudo passwd [사용자이름]
     - SERVER_PASSWORD
     - SERVER_USER
 
+- 상단 Actions 탭 클릭(액션 탭이 없다면 아래처럼 퍼미션을 수정해야합니다.)
+ ![image](https://github.com/maxkim77/CI/assets/141907655/2193bc01-4375-422d-8969-0deb177e91d2)
 
+- set up a workflow yourself 클릭
+![image](https://github.com/maxkim77/CI/assets/141907655/b71a123d-82fe-4430-9852-c9200f072ce7)
+
+- 깃허브 액션 트리거 파일 생성화면
+![image](https://github.com/maxkim77/CI/assets/141907655/29708a7b-59b0-4708-8d0b-644bd6caac04)
+
+ 
 오류상황:
 
 - uwsgi 설정 문제와 Django 모듈 누락 이슈.
