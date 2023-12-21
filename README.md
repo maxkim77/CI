@@ -7,7 +7,15 @@ sudo apt update
 
 sudo apt upgrade
 
-git pull 레포주소
+mkdir 레포명
+
+cd 레포명
+
+git init
+
+git remote add origin [원격-리포지토리-URL]
+
+git pull origin main
 
 git config --global credential.helper store
 
