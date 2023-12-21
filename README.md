@@ -31,7 +31,15 @@ sudo passwd [사용자이름]
 
 ```
 
+- 레포지토리 설정 → Secrets and variables 클릭
 
+- Git action에서 사용할 시크릿 키 추가하기
+
+    - DEBUG
+    - SECRET_KEY
+    - SERVER_HOST
+    - SERVER_PASSWORD
+    - SERVER_USER
 
 
 오류상황:
