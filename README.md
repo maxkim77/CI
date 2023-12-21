@@ -65,6 +65,100 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
+- Gunicorn 세팅 및 실행
+
+```
+pip install gunicorn # 구니콘 설치
+
+cd /home/{사용자명}/{프로젝트 루트 디렉터리}
+
+gunicorn --bind 0:5000 {프로젝트이름}.wsgi:application
+"""
+5000번 포트로 WSGI 서버(gunicorn)와 연결된 WSGI 애플리케이션(django)를 실행시킨다.
+# nginx
+
+[2023-11-28 10:56:09 +0900] [52669] [INFO] Starting gunicorn 21.2.0
+[2023-11-28 10:56:09 +0900] [52669] [INFO] Listening at: http://0.0.0.0:5000 (52669)
+[2023-11-28 10:56:09 +0900] [52669] [INFO] Using worker: sync
+[2023-11-28 10:56:09 +0900] [52670] [INFO] Booting worker with pid: 52670
+
+이렇게 나오면 WSGI 서버와 애플리케이션이 실행된것입니다.
+"""
+
+```
+
+- 유닉스(우분투) 소켓을 활용한 수행항법
+유닉스 소켓: IPC 소켓이라고도 불리며 시스템내  프로세스 간의 데이터를 교환하기 위한 수단.
+
+```
+cd /home/{사용자명}/{프로젝트 루트 디렉터리}
+
+gunicorn --bind unix:/tmp/gunicorn.sock {프로젝트명}.wsgi:application
+
+"""
+[2023-11-28 11:56:09 +0900] [52669] [INFO] Starting gunicorn 21.2.0
+[2023-11-28 11:56:09 +0900] [52669] [INFO] Listening at: unix:/tmp/gunicorn.sock (52669)
+[2023-11-28 11:56:09 +0900] [52669] [INFO] Using worker: sync
+[2023-11-28 11:56:09 +0900] [52670] [INFO] Booting worker with pid: 52670
+"""
+
+```
+
+- 우분투에 Gunicron 서비스 등록
+```
+sudo vim /etc/systemd/system/{프로젝트명}.service # 편집기 실행
+### {프로젝트명}.service
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu # 유저이름 확인해주세요.
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/{프로젝트 디렉토리} # 프로젝트 루트 디렉터리
+EnvironmentFile=/home/ubuntu/{프로젝트 디렉토리}/.env # 환경변수 파일
+ExecStart=/home/ubuntu/{프로젝트 디렉토리}/venv/bin/gunicorn \ #가상환경에 설치된 gunicorn
+        --workers 2 \ #워커 갯수
+        --bind unix:/tmp/gunicorn.sock \ # WSGI실행 명령
+        {프로젝트명}.wsgi:application # WSGI(Django) 애플리케이션
+
+[Install]
+WantedBy=multi-user.target
+
+
+# 서비스 실행
+sudo systemctl start {위에서 작성했던 파일명}
+
+# 실행확인
+sudo systemctl status {위에서 작성했던 파일명} # .service 빼고입니다.
+
+sudo systemctl enable {위에서 작성했던 파일명} # .service 빼고입니다.
+# 서버가 재실행 될 때 Gunicorn 서비스가 자동 실행되게 만들어 줍니다.
+
+sudo systemctl restart {위에서 작성했던 파일명} # .service 빼고입니다.
+# 서비스 재실행 명령
+```
+
+- 4. Nginx 설정
+ 
+```
+sudo vim /etc/nginx/sites-enabled/default # nginx 설정파일 편집 실행
+
+server{
+	root /var/www/html;
+	server_name # 도메인 주소 없으면 IPV4 주소
+
+	location /api/v1/{ # 프론트에서 오는 /api/v1/ 으로 시작되는 모든 요청 핸들링
+             include proxy_params;
+             proxy_pass http://unix:/tmp/gunicorn.sock;
+        }
+
+}
+```
+
+
+
 
 - 레포지토리 설정 → Secrets and variables 클릭
 
