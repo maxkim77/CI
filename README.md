@@ -311,6 +311,24 @@ server_name 도메인주소 IP주소;
 모든 설정이 완료되었으면 nginx를 재실행해주세요.
 $ sudo nginx -t
 $ sudo service nginx reload
+
+server {
+        server_name 15.165.235.135 schooltalks.maxworld7070.net;
+
+
+        location / {
+        include proxy_params;
+        proxy_pass http://unix:/tmp/gunicorn.sock;
+        }
+
+        location /static/ {
+        alias /home/ubuntu/SchoolTalks-Backend/staticfiles/;
+        }
+
+        location /media/ {
+        alias /home/ubuntu/SchoolTalks-Backend/media/;
+        }
+
 ​
 마지막으로 certbot을 이용하여 인증서를 발급받습니다.
 $ sudo certbot --nginx -d 도메인주소
