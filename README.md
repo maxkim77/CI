@@ -256,7 +256,7 @@ jobs:
 - 500 에러는 migrate가 안될 가능성이 있음 
 - 배포를 위해선 git에 miration 폴더 및 init 도 추가해야 함
 
-오류상황:
+- 오류상황:
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/ba9ef99c-1c9d-4daf-af30-67fb18c34fa0)
 
