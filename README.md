@@ -240,13 +240,21 @@ jobs:
             pip install -r requirements.txt
             sudo systemctl restart {아까등록한서비스이름}.service
 ```
-오류상황: 배포 이후 앱 몇 개가 500에러가 뜸
+
+
+
+
+
+
+
+
+**오류상황: 배포 이후 앱 몇 개가 500에러가 뜸**
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/f4299f8c-7758-46be-ae2e-13840b49f229)
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/d9e2bbb6-b0b2-4ec0-a425-250b3e80147e)
 
-- 해결법 :
+**해결법 :**
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/d80c78a2-6ff6-48aa-82ec-bcd437968e00)
 
@@ -256,26 +264,26 @@ jobs:
 - 500 에러는 migrate가 안될 가능성이 있음 
 - 배포를 위해선 git에 miration 폴더 및 init 도 추가해야 함
 
-- 오류상황:
+**오류상황:**
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/ba9ef99c-1c9d-4daf-af30-67fb18c34fa0)
 
 - git 저장소 연결 및 경로 설정 문제.
 
 
-해결책:
+**해결책:**
 
 
 - git remote 및 가상환경 위치 재설정
 
 
-오류상황:
+**오류상황:**
 
 
 - ModuleNotFoundError: No module named 'django' 오류.
 
   
-해결책:
+**해결책:**
 
 
 - 가상환경 확인 및 필요한 패키지 재설치(pip install -r requirements.txt).
