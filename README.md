@@ -244,6 +244,26 @@ jobs:
 
 ## 오류상황 정리
 
+**오류상황:** 404 에러가 뜸(위치오류)
+**원인:**
+교안에 따라 location / 위치 설정을 하였지만, 새로운 프로젝트와 url 주소가 맞지 않아서 그냥 location 부분을 '/'로 비워둠
+proxy가 url 위치를 찾지 못해서 생기는 문제 
+**해결책**
+nginx의 default 값이 잘못 설정되어 다음과 같이 수정하여 해결
+
+```
+        location / {
+        include proxy_params;
+        proxy_pass http://unix:/tmp/gunicorn.sock;
+       }
+```
+**400에러: Bad Request**
+**오류상황: 배포 이후 페이지는 찾지만, 보안 관련설정이 올바르지 않아서 뜨는 오류**
+
+**해결법:**
+- ALLOWED_HOST를 임의로 비워둬서 발생했던 오류
+- DEBUG = False로 보안상 두기
+
 **오류상황: 배포 이후 앱 몇 개가 500에러가 뜸**
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/f4299f8c-7758-46be-ae2e-13840b49f229)
@@ -284,7 +304,7 @@ jobs:
 
 - 가상환경 확인 및 필요한 패키지 재설치(pip install -r requirements.txt).
 
-##부록 HTTPS 적용해보기
+# 부록 HTTPS 적용해보기
 ```
 $ sudo apt-get update
 $ sudo apt-get install software-properties-common
