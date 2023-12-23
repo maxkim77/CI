@@ -242,11 +242,7 @@ jobs:
 ```
 
 
-
-
-
-
-
+## 오류상황 정리
 
 **오류상황: 배포 이후 앱 몇 개가 500에러가 뜸**
 
@@ -287,3 +283,37 @@ jobs:
 
 
 - 가상환경 확인 및 필요한 패키지 재설치(pip install -r requirements.txt).
+
+##부록 HTTPS 적용해보기
+```
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository universe
+$ sudo apt-get update
+​```
+다음으로는 Certbot을 설치합니다.
+Certbot은 Let's Encrypt 인증서를 사용하여 자동으로 HTTPS를 활성화하는 무료 오픈 소스 소프트웨어 도구입니다.
+```
+$ sudo apt-get install certbot python3-certbot-nginx
+​```
+nginx에 server_name을 설정해줍니다.
+
+```
+$ sudo vim /etc/nginx/sites-available/default
+
+#디폴트 폴더명은 프로젝트에 따라 다를 수 있음.
+
+​```
+server {
+server_name 도메인주소 IP주소;
+}
+​
+모든 설정이 완료되었으면 nginx를 재실행해주세요.
+$ sudo nginx -t
+$ sudo service nginx reload
+​
+마지막으로 certbot을 이용하여 인증서를 발급받습니다.
+$ sudo certbot --nginx -d 도메인주소
+
+필수 포트를 443으로 열어주어야 접속이됨
+
