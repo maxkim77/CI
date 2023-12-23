@@ -310,20 +310,16 @@ $ sudo apt-get update
 $ sudo apt-get install software-properties-common
 $ sudo add-apt-repository universe
 $ sudo apt-get update
-​```
 다음으로는 Certbot을 설치합니다.
 Certbot은 Let's Encrypt 인증서를 사용하여 자동으로 HTTPS를 활성화하는 무료 오픈 소스 소프트웨어 도구입니다.
-```
+
 $ sudo apt-get install certbot python3-certbot-nginx
-​```
+
 nginx에 server_name을 설정해줍니다.
 
-```
 $ sudo vim /etc/nginx/sites-available/default
 
 #디폴트 폴더명은 프로젝트에 따라 다를 수 있음.
-
-​```
 server {
 server_name 도메인주소 IP주소;
 }
@@ -331,23 +327,8 @@ server_name 도메인주소 IP주소;
 모든 설정이 완료되었으면 nginx를 재실행해주세요.
 $ sudo nginx -t
 $ sudo service nginx reload
+```
 
-server {
-        server_name 15.165.235.135 schooltalks.maxworld7070.net;
-
-
-        location / {
-        include proxy_params;
-        proxy_pass http://unix:/tmp/gunicorn.sock;
-        }
-
-        location /static/ {
-        alias /home/ubuntu/SchoolTalks-Backend/staticfiles/;
-        }
-
-        location /media/ {
-        alias /home/ubuntu/SchoolTalks-Backend/media/;
-        }
 
 ​
 마지막으로 certbot을 이용하여 인증서를 발급받습니다.
