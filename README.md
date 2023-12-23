@@ -240,22 +240,21 @@ jobs:
             pip install -r requirements.txt
             sudo systemctl restart {아까등록한서비스이름}.service
 ```
-오류상황:
+오류상황: 배포 이후 앱 몇 개가 500에러가 뜸
 
-- uwsgi 설정 문제와 Django 모듈 누락 이슈.
+![image](https://github.com/maxkim77/CI/assets/141907655/f4299f8c-7758-46be-ae2e-13840b49f229)
 
+![image](https://github.com/maxkim77/CI/assets/141907655/d9e2bbb6-b0b2-4ec0-a425-250b3e80147e)
 
-해결책:
-- uwsgi.ini 파일에 http = :8000 추가.
+- 해결법 :
 
+![image](https://github.com/maxkim77/CI/assets/141907655/d80c78a2-6ff6-48aa-82ec-bcd437968e00)
 
-오류상황:
-- uwsgi가 이미 실행 중이라는 오류(Address already in use).
-
-
-해결책:
-- lsof -i :8000 및 lsof -i :8080 사용하여 포트 사용 상태 확인 후 필요시 해당 프로세스 종료(kill).
-
+- ls -a로 폴더 권한을 확인하던중 되던 앱은 migration이 있는데 없는앱은 migration이 없었음
+- migrations이 안되었던 상황 + 팀원이 .gitignore에 migration을 추가해서 이후에 추가 된 앱들이 migration이 없는 체로 배포가됨
+- mgirations 폴더를 다시 올리고 makemigrations 및 migrate 함
+- 500 에러는 migrate가 안될 가능성이 있음 
+- 배포를 위해선 git에 miration 폴더 및 init 도 추가해야 함
 
 오류상황:
 
