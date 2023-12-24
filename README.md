@@ -256,26 +256,28 @@ Nginx 서버가 기본적으로 www-data 사용자로 실행되어 웹 애플리
 4. 오류 해결법 상세히 기술
 ```
 4.1. Nginx의 실행 사용자 변경
+
 /etc/nginx/nginx.conf 파일을 열어서 Nginx의 실행 사용자를 ubuntu로 변경.
 sql
-Copy code
 user ubuntu;
+
 4.2. 권한 변경
+
 /media 디렉토리의 소유자와 그룹을 ubuntu로 변경.
-bash
-Copy code
 sudo chown -R ubuntu:ubuntu /media
+cat /etc/nginx/nginx.conf | grep user
+
 4.3. Nginx 구성 파일 테스트
 변경된 구성 파일의 유효성을 검사.
-Copy code
 sudo nginx -t
+
 4.4. Nginx 재시작
 변경 사항이 적용되도록 Nginx 서버를 재시작.
-Copy code
 sudo systemctl restart nginx
+
+```
 5. 기타 정보
 sudo systemctl status nginx 명령으로 Nginx 서버 상태 확인.
-```
 
 **오류상황:** 404 에러가 뜸(위치오류)
 **원인:**
