@@ -254,6 +254,7 @@ jobs:
 Nginx 서버가 기본적으로 www-data 사용자로 실행되어 웹 애플리케이션의 파일에 접근할 때 권한 부족으로 인한 오류.
 
 4. 오류 해결법 상세히 기술
+```
 4.1. Nginx의 실행 사용자 변경
 /etc/nginx/nginx.conf 파일을 열어서 Nginx의 실행 사용자를 ubuntu로 변경.
 sql
@@ -274,6 +275,8 @@ Copy code
 sudo systemctl restart nginx
 5. 기타 정보
 sudo systemctl status nginx 명령으로 Nginx 서버 상태 확인.
+```
+
 **오류상황:** 404 에러가 뜸(위치오류)
 **원인:**
 교안에 따라 location / 위치 설정을 하였지만, 새로운 프로젝트와 url 주소가 맞지 않아서 그냥 location 부분을 '/'로 비워둠
