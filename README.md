@@ -286,7 +286,7 @@ sudo systemctl restart nginx
 sudo systemctl status nginx 명령으로 Nginx 서버 상태 확인.
 ```
 
-**오류상황: 404 에러가 뜸(위치오류)**
+**404 에러: 오류 해결 과정**
 
 
 **원인:**
@@ -317,21 +317,29 @@ nginx의 default 값이 잘못 설정되어 다음과 같이 수정하여 해결
 
 
 **500에러 : Internal Server Error**
+
+
 **오류상황: 배포 이후 앱 몇 개가 500에러가 뜸**
 
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/f4299f8c-7758-46be-ae2e-13840b49f229)
 
+
 ![image](https://github.com/maxkim77/CI/assets/141907655/d9e2bbb6-b0b2-4ec0-a425-250b3e80147e)
 
 
+**원인**
+- ls -a로 폴더 권한을 확인하던중 되던 앱은 migration이 있는데 없는앱은 migration이 없었음
+- migrations이 안되었던 상황 gitignore에 migration을 추가해서 이후에 추가 된 앱들이 migration이 없는 체로 배포가됨
 
-**해결법 :**
+
+**해결책 :**
+
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/d80c78a2-6ff6-48aa-82ec-bcd437968e00)
 
-- ls -a로 폴더 권한을 확인하던중 되던 앱은 migration이 있는데 없는앱은 migration이 없었음
-- migrations이 안되었던 상황 + 팀원이 .gitignore에 migration을 추가해서 이후에 추가 된 앱들이 migration이 없는 체로 배포가됨
+
+
 - mgirations 폴더를 다시 올리고 makemigrations 및 migrate 함
 - 500 에러는 migrate가 안될 가능성이 있음 
 - 배포를 위해선 git에 miration 폴더 및 init 도 추가해야 함
