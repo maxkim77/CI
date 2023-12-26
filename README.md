@@ -243,22 +243,29 @@ jobs:
 
 
 ## 오류상황 정리
+
 **403 Forbidden 오류 해결 과정**
+
+
 1. 오류명
 403 Forbidden 오류
+
+
 
 2. 오류 상황
 웹 서버(Nginx)를 사용하는 웹 애플리케이션에서 403 Forbidden 오류 발생.
 
+
+
 3. 오류 원인
 Nginx 서버가 기본적으로 www-data 사용자로 실행되어 웹 애플리케이션의 파일에 접근할 때 권한 부족으로 인한 오류.
+
 
 4. 오류 해결법 상세히 기술
 ```
 4.1. Nginx의 실행 사용자 변경
 
 /etc/nginx/nginx.conf 파일을 열어서 Nginx의 실행 사용자를 ubuntu로 변경.
-sql
 user ubuntu;
 
 4.2. 권한 변경
@@ -275,14 +282,18 @@ sudo nginx -t
 변경 사항이 적용되도록 Nginx 서버를 재시작.
 sudo systemctl restart nginx
 
-```
 5. 기타 정보
 sudo systemctl status nginx 명령으로 Nginx 서버 상태 확인.
+```
 
-**오류상황:** 404 에러가 뜸(위치오류)
+**오류상황: 404 에러가 뜸(위치오류)**
+
+
 **원인:**
 교안에 따라 location / 위치 설정을 하였지만, 새로운 프로젝트와 url 주소가 맞지 않아서 그냥 location 부분을 '/'로 비워둠
 proxy가 url 위치를 찾지 못해서 생기는 문제 
+
+
 **해결책**
 nginx의 default 값이 잘못 설정되어 다음과 같이 수정하여 해결
 
@@ -292,18 +303,28 @@ nginx의 default 값이 잘못 설정되어 다음과 같이 수정하여 해결
         proxy_pass http://unix:/tmp/gunicorn.sock;
        }
 ```
+
+
 **400에러: Bad Request**
+
+
 **오류상황: 배포 이후 페이지는 찾지만, 보안 관련설정이 올바르지 않아서 뜨는 오류**
+
 
 **해결법:**
 - ALLOWED_HOST를 임의로 비워둬서 발생했던 오류
 - DEBUG = False로 보안상 두기
 
+
+**500에러 : Internal Server Error**
 **오류상황: 배포 이후 앱 몇 개가 500에러가 뜸**
+
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/f4299f8c-7758-46be-ae2e-13840b49f229)
 
 ![image](https://github.com/maxkim77/CI/assets/141907655/d9e2bbb6-b0b2-4ec0-a425-250b3e80147e)
+
+
 
 **해결법 :**
 
@@ -314,6 +335,9 @@ nginx의 default 값이 잘못 설정되어 다음과 같이 수정하여 해결
 - mgirations 폴더를 다시 올리고 makemigrations 및 migrate 함
 - 500 에러는 migrate가 안될 가능성이 있음 
 - 배포를 위해선 git에 miration 폴더 및 init 도 추가해야 함
+
+
+
 
 **오류상황:**
 
